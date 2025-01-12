@@ -1,4 +1,4 @@
-# from random import choice, randint
+from random import choice, randint
 
 import pygame
 
@@ -41,6 +41,9 @@ clock = pygame.time.Clock()
 
 # Тут опишите все классы игры.
 class GameObject():
+    """Базовый класс содержащий цвет,
+    позицию и заготовку метода для отрисовки объекта на игровои поле
+    """
     def __init__(self) -> None:
         self.position = ((SCREEN_WIDTH // 2), (SCREEN_HEIGHT // 2))
         self.body_color = None
@@ -53,6 +56,8 @@ class Apple(GameObject):
     def __init__(self):
         super().__init__()
         self.body_color = APPLE_COLOR
+        self.position = (randint(0, GRID_HEIGHT - 1) * GRID_SIZE,
+                         randint(0, GRID_WIDTH - 1) * GRID_SIZE)
 
     def draw(self):
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
@@ -61,7 +66,11 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    pass
+    def __init__(self):
+        super().__init__()
+        self.body_color = SNAKE_COLOR
+        self.lenght = [1]
+        # self.position =
 
 
 # Функция обработки действий пользователя
